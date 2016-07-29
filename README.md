@@ -11,8 +11,10 @@
  - CoreSpider：控制爬虫的整体逻辑，负责调用其他模块
  - HtmlParser：使用BeautifulSoup解析HTML页面，通过对HTML标签及其属性的选择，获取所有目标的名称和链接
  - Item：每一个目标是一个Item对象，包含有url和name属性
- - TaskManager：使用一个线程安全的队列保存任务（下版本将加入多线程支持）
- - FileDownloader：从任务队列中不断取出Item对象，下载并命名、保存到指定位置
+ - TaskManager：使用一个线程安全的队列保存任务
+ - MultiThreadFileDownloader：从任务队列中不断取出Item对象，下载并命名、保存到指定位置，下载支持多线程
+
+    ![项目结构](https://github.com/lzjohnny/MoeSpider/blob/master/Python%E7%88%AC%E8%99%AB%E6%9E%B6%E6%9E%84%E5%9B%BE.png)
 
 ##用到的模块
 
