@@ -14,7 +14,7 @@
  - TaskManager：使用一个线程安全的队列保存任务
  - MultiThreadFileDownloader：从任务队列中不断取出Item对象，下载并命名、保存到指定位置，下载支持多线程
 
-    ![项目结构](https://github.com/lzjohnny/MoeSpider/blob/master/Python%E7%88%AC%E8%99%AB%E6%9E%B6%E6%9E%84%E5%9B%BE.png)
+![项目结构](https://github.com/lzjohnny/MoeSpider/blob/master/Python%E7%88%AC%E8%99%AB%E6%9E%B6%E6%9E%84%E5%9B%BE.png)
 
 ##用到的模块
 
