@@ -20,9 +20,9 @@ class MultiThreadFileDownloader(threading.Thread):
         print(str(self.threadName) + '线程停止')
 
     def download(self):
-        # Python不支持 while (item = self.taskManager.get()) != None 语法
+        # Python不支持 while (item = self.taskManager.getFileItem()) != None 语法
         # Python赋值语句无返回值（Java中赋值语句返回所赋的值）
-        item = self.taskManager.get()
+        item = self.taskManager.getFileItem()
         while item != None:
             print(str(self.threadName) + '线程当前item：' + str(item))
             url = item.url
@@ -32,9 +32,9 @@ class MultiThreadFileDownloader(threading.Thread):
             filePath = self.dirname + os.sep + name + '.jpg'
             urllib.request.urlretrieve(url, filePath)
 
-            item = self.taskManager.get()
+            item = self.taskManager.getFileItem()
 
-        # while (item = self.taskManager.get()) != None:
+        # while (item = self.taskManager.getFileItem()) != None:
         #     url = item.url
         #     name = item.name
         #     filePath = self.dirname + os.sep + name + '.jpg'

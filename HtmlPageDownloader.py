@@ -1,3 +1,6 @@
+# 单线程下载，已弃用
+# 由MultiThreadHtmlPageDownloader取代
+
 import urllib.request
 
 # 下载网页

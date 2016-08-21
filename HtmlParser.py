@@ -10,17 +10,25 @@ class HtmlParser(object):
 
     '''
     每一个HtmlParser对象中保存了要解析的HTML页面
-    parser = HtmlParser(html)
-    parser.parse()
+    parser = HtmlParser(html, taskManager)
+    parser.pageUrlParser()
+    parser.fileUrlParser()
     '''
-    def __init__(self, html, taskManager):
+    def __init__(self, taskManager):
         # super().__init__()
-        self.html = html
         self.taskManager = taskManager
 
-    def parse(self):
+    # 解析出新页面链接
+    def pageUrlParser(self, html, threadName):
+        print('线程 ' + str(threadName) + ' 开始解析新页面链接')
+
+        pass
+
+    # 解析出新目标文件链接
+    def fileUrlParser(self, html, threadName):
+        print('线程 ' + str(threadName) + ' 开始解析新文件链接')
         # soup = BeautifulSoup(open('D:/kancolle.html', encoding='utf-8'), 'html.parser')
-        soup = BeautifulSoup(self.html, 'html.parser')
+        soup = BeautifulSoup(html, 'html.parser')
         # print(soup.prettify())
         trTag = soup.find_all('tr', valign='bottom')
         for tr in trTag:  # tr是bs4.element.Tag类型
@@ -36,7 +44,10 @@ class HtmlParser(object):
                 url = srcset.split(' ', 1)[0]
 
                 item = Item.Item(url, name)
-                self.taskManager.add(item)
+
+                # 多个线程同时调用同一个taskManager对象的addFileItem方法
+                # 但由于Queue自带线程锁，此处不需要显式对线程同步
+                self.taskManager.addFileItem(item)
 
                 # print(name)
                 # print(url)

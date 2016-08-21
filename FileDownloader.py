@@ -1,3 +1,6 @@
+# 单线程下载，已弃用
+# 由MultiThreadFileDownloader取代
+
 import urllib.request
 import os
 
@@ -14,18 +17,18 @@ class FileDownloader(object):
 
     def download(self):
 
-        # Python不支持 while (item = self.taskManager.get()) != None 语法
+        # Python不支持 while (item = self.taskManager.getFileItem()) != None 语法
         # Python赋值语句无返回值（Java中赋值语句返回所赋的值）
-        item = self.taskManager.get()
+        item = self.taskManager.getFileItem()
         while item != None:
             url = item.url
             name = item.name
             filePath = self.dirname + os.sep + name + '.jpg'
             urllib.request.urlretrieve(url, filePath)
 
-            item = self.taskManager.get()
+            item = self.taskManager.getFileItem()
 
-        # while (item = self.taskManager.get()) != None:
+        # while (item = self.taskManager.getFileItem()) != None:
         #     url = item.url
         #     name = item.name
         #     filePath = self.dirname + os.sep + name + '.jpg'
