@@ -1,6 +1,8 @@
 from bs4 import BeautifulSoup
 from bs4 import element
-import Item
+
+from spider import Item
+
 
 # 对于指定的HTML页面进行解析，抽取出要抓取图片的url和name
 # 保存在Item对象中，Item对象保存在一个“线程安全”队列中
@@ -21,7 +23,7 @@ class HtmlParser(object):
     # 解析出新页面链接
     def pageUrlParser(self, html, threadName):
         print('线程 ' + str(threadName) + ' 开始解析新页面链接')
-
+        soup = BeautifulSoup(html, 'html.parser')
         pass
 
     # 解析出新目标文件链接

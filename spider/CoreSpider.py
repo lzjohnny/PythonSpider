@@ -1,9 +1,8 @@
 import HtmlParser
-import TaskManager
-import FileDownloader
 import MultiThreadFileDownloader
-import HtmlPageDownloader
 import MultiThreadHtmlPageDownloader
+import TaskManager
+
 
 class CoreSpider(object):
     def __init__(self, url, pageDLThreadNum, fileDLThreadNum):

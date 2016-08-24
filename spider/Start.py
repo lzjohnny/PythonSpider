@@ -1,4 +1,4 @@
-import CoreSpider
+from spider import CoreSpider
 
 if __name__ == "__main__":
     # 开始爬虫

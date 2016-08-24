@@ -21,7 +21,12 @@
  - 第三方模块 BeautifulSoup
  - 内置模块 urllib.request（在Python2.X版本为urllib2）、queue等
 
-## 需要的改进：增加多线程支持
+## 已改进：增加多线程支持
 
-HtmlParser、FileDownloader和TaskManager构成一个生产者-消费者模型
-TaskManager维护一个线程安全队列：放入速度 > 取出速度 可以缓冲，放入速度 < 取出速度 执行取出行为线程阻塞
+TaskManager维护两个线程安全队列：待下载网页任务、待下载文件任务
+放入速度 > 取出速度 可以缓冲，放入速度 < 取出速度 执行取出行为线程阻塞，阻塞超时为10s
+MultiThreadHtmlPageDownloader、HtmlParser从TaskManager取出待下载网页任务，下载解析出新链接添加到TaskManager指定的队列中
+下载网页和下载文件都是多线程执行
+
+----------
+抓取其他页面需要编写HtmlParser的解析逻辑
