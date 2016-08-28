@@ -26,7 +26,11 @@ class MultiThreadHtmlPageDownloader(threading.Thread):
             if response.getcode() != 200:
                 return None
             html = response.read()
+            print('--1--')
             self.htmlParser.pageUrlParser(html, self.threadName)
+            print('--2--')
             self.htmlParser.fileUrlParser(html, self.threadName)
+            print('--3--')
 
             url = self.taskManager.getPageUrl()
+            print('取出新页面：' + url)

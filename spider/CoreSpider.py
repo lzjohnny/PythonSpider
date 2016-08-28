@@ -1,7 +1,7 @@
-import HtmlParser
-import MultiThreadFileDownloader
-import MultiThreadHtmlPageDownloader
-import TaskManager
+from spider import HtmlParser
+from spider import MultiThreadFileDownloader
+from spider import MultiThreadHtmlPageDownloader
+from spider import TaskManager
 
 
 class CoreSpider(object):
@@ -9,11 +9,11 @@ class CoreSpider(object):
         super().__init__()
         # self.url = url
         self.taskManager = TaskManager.TaskManager()
+        # self.taskManager.pageDownloadTaskQueue.put(url)
         self.taskManager.addPageUrl(url)
         self.pageDLThreadNum = pageDLThreadNum
         self.fileDLThreadNum = fileDLThreadNum
 
-    # 待修改
     def start(self):
 
         # print('开始下载页面')
