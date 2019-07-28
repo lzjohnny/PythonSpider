@@ -1,5 +1,5 @@
 import random
-from spider.Config import PAGE_DL_SLEEP
+from spider.Config import PAGE_DL_SLEEP, DOWNLOAD_TRIES
 import time
 import urllib.request
 import threading
@@ -47,7 +47,18 @@ class MultiThreadHtmlPageDownloader(threading.Thread):
             req.add_header('user-agent', ua)
             req.add_header('Host', 'www.tan8.com')
 
-            response = urllib.request.urlopen(req)
+            response = None
+            remaining_download_tries = DOWNLOAD_TRIES
+            while remaining_download_tries > 0:
+                try:
+                    response = urllib.request.urlopen(req)
+                except:
+                    print('{0}线程下载页面异常 url:{1}'.format(str(self.threadName), url))
+                    remaining_download_tries = remaining_download_tries - 1
+                    continue
+                else:
+                    break
+
             if response.getcode() != 200:
                 return None
             html = response.read()

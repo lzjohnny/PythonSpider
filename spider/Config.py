@@ -2,3 +2,5 @@
 PAGE_DL_SLEEP = 0.5
 # 下载每个文件后 sleep 时间
 FILE_DL_SLEEP = 0.5
+# 下载重试次数
+DOWNLOAD_TRIES = 10
