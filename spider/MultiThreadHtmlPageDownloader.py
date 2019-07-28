@@ -1,6 +1,5 @@
 import random
-from urllib.parse import urlparse
-from spider.Config import PAGE_DL_SLEEP, LOG_HIDE_HOST
+from spider.Config import PAGE_DL_SLEEP
 import time
 import urllib.request
 import threading
@@ -59,9 +58,6 @@ class MultiThreadHtmlPageDownloader(threading.Thread):
             print('--3--')
 
             url = self.taskManager.getPageUrl()
-            log_url = url
-            if LOG_HIDE_HOST:
-                log_url = urlparse(url).path
-            print('取出新页面：' + log_url)
+            print('取出新页面：' + url)
 
             time.sleep(PAGE_DL_SLEEP)
