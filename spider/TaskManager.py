@@ -40,7 +40,7 @@ class TaskManager():
     # 取不出元素等待10s
     def getFileItem(self):
         try:
-            item = self.fileDownloadTaskQueue.get(timeout=10)
+            item = self.fileDownloadTaskQueue.get(timeout=None)
             return item
         except:
             return None
@@ -57,7 +57,7 @@ class TaskManager():
 
     def getPageUrl(self):
         try:
-            url = self.pageDownloadTaskQueue.get(timeout=10)
+            url = self.pageDownloadTaskQueue.get(timeout=None)
             return url
         except:
             return None

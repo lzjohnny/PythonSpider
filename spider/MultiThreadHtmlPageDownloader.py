@@ -39,7 +39,7 @@ class MultiThreadHtmlPageDownloader(threading.Thread):
 
     def download(self):
         url = self.taskManager.getPageUrl()
-        while url != None:
+        while url is not None:
             print('线程 ' + str(self.threadName) + ' 开始下载页面')
 
             req = urllib.request.Request(url)
