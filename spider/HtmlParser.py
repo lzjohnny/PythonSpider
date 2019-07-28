@@ -1,4 +1,4 @@
-import random
+import logging
 from bs4 import BeautifulSoup
 from spider import Item
 import re
@@ -28,11 +28,11 @@ class HtmlParser(object):
         url = "http://www.tan8.com/yuepu-{}-m.html".format(int(id) + int(threadName) + 1)
 
         self.taskManager.addPageUrl(url)
-        # print('线程' + str(threadName) + 'addPage:' + url)
+        # logging.info('线程' + str(threadName) + 'addPage:' + url)
 
     # 解析出新文件链接
     def fileUrlParser(self, url, html, threadName):
-        # print('线程 ' + str(threadName) + ' 开始解析新图片链接')
+        # logging.info('线程 ' + str(threadName) + ' 开始解析新图片链接')
         soup = BeautifulSoup(html, 'html.parser')
         try:
             title = (soup.title).string

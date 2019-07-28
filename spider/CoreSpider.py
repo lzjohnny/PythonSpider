@@ -1,3 +1,4 @@
+import logging
 from spider import HtmlParser
 from spider import MultiThreadFileDownloader
 from spider import MultiThreadHtmlPageDownloader
@@ -17,7 +18,7 @@ class CoreSpider(object):
     def start(self):
 
         # 多线程下载网页
-        print('开始多线程下载页面...')
+        logging.info('开始多线程下载页面...')
         htmlParser = HtmlParser.HtmlParser(self.taskManager)
 
         pageDLthreadsList = []
@@ -29,7 +30,7 @@ class CoreSpider(object):
             t.start()
 
         #多线程下载图片
-        # print('开始下载图片')
+        # logging.info('开始下载图片')
         fileDLthreadsList = []
         for i in range(self.fileDLThreadNum):
             fileDownloaderThread = MultiThreadFileDownloader.MultiThreadFileDownloader(self.taskManager, i)

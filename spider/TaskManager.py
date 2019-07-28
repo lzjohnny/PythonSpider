@@ -1,3 +1,4 @@
+import logging
 import queue
 import threading
 
@@ -28,7 +29,7 @@ class TaskManager():
             self.fileDownloadTaskQueue.put(item)
             name = item.name
             url = item.url
-            print('addFile:{0} url:{1}'.format(name, url))
+            logging.info('addFile:{0} url:{1}'.format(name, url))
 
     # 取不出元素返回None
     # def get(self):
@@ -53,7 +54,7 @@ class TaskManager():
         l.release()
         if not dup:
             self.pageDownloadTaskQueue.put(url)
-            print('addPage: ' + url)
+            logging.info('addPage: ' + url)
 
     def getPageUrl(self):
         try:

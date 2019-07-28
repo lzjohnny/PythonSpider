@@ -11,3 +11,7 @@ FILE_DL_LONG_SLEEP = 1.2
 DOWNLOAD_TRIES = 5
 # 队列拥挤评定阈值，对生产者消费者提速或降速
 QUEUE_CROWDED_SIZE = 500
+
+FILE_LOG = True
+CONSOLE_LOG = True
+LOG_FILENAME = 'spider.log'
