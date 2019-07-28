@@ -42,9 +42,10 @@ class HtmlParser(object):
             for imgTag in imgTags:
                 img = imgTag['src']
                 path = urlparse(img).path.split('/')[-1]
+                id = urlparse(img).path.split('/')[-2]
                 num = int(path.split('.')[-2]) + 1
 
-                item = Item.Item(img, "{0} {1}-{2}" .format(title, num, total))
+                item = Item.Item(img, "{0} {1} {2}-{3}" .format(id, title, num, total))
                 self.taskManager.addFileItem(item)
         except:
             pass

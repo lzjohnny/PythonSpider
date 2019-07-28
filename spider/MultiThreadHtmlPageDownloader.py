@@ -1,5 +1,5 @@
 import random
-from spider.Config import PAGE_DL_SLEEP, DOWNLOAD_TRIES
+from spider.Config import *
 import time
 import urllib.request
 import threading
@@ -39,6 +39,7 @@ class MultiThreadHtmlPageDownloader(threading.Thread):
 
     def download(self):
         url = self.taskManager.getPageUrl()
+        sleepTime = PAGE_DL_NORMAL_SLEEP
         while url is not None:
             print('线程 ' + str(self.threadName) + ' 开始下载页面')
 
@@ -71,4 +72,9 @@ class MultiThreadHtmlPageDownloader(threading.Thread):
             url = self.taskManager.getPageUrl()
             print('取出新页面：' + url)
 
-            time.sleep(PAGE_DL_SLEEP)
+            if random.randint(0, 9) == 0:  # 10% 概率进行下载队列拥挤程度评定
+                if self.taskManager.getFileDownloadTaskQueueCount() > QUEUE_CROWDED_SIZE:
+                    sleepTime = PAGE_DL_LONG_SLEEP  # 生产减速
+                else:
+                    sleepTime = PAGE_DL_NORMAL_SLEEP  # 生产常速
+            time.sleep(sleepTime)

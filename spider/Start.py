@@ -12,12 +12,10 @@ if __name__ == "__main__":
     print("START!")
 
     # 种子链接：导航页面
-    # url = "http://www.tan8.com/piano.html"
-    url = "http://www.tan8.com/yuepu-80-m.html"
-    # url = "https://zh.moegirl.org/zh-cn/Template:%E8%88%B0%E9%98%9FCollection:%E5%AF%BC%E8%88%AA"
+    url = "http://www.tan8.com/yuepu-10-m.html"
 
-    pageDLThreadNum = 3
-    fileDLThreadNum = 3
+    pageDLThreadNum = 10
+    fileDLThreadNum = 10
 
     spider = CoreSpider.CoreSpider(url, pageDLThreadNum, fileDLThreadNum)
     spider.start()

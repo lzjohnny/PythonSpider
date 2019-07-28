@@ -1,4 +1,5 @@
-from spider.Config import FILE_DL_SLEEP, DOWNLOAD_TRIES
+from spider.Config import *
+import random
 import threading
 import time
 import urllib.request
@@ -26,7 +27,8 @@ class MultiThreadFileDownloader(threading.Thread):
         # Python不支持 while (item = self.taskManager.getFileItem()) != None 语法
         # Python赋值语句无返回值（Java中赋值语句返回所赋的值）
         item = self.taskManager.getFileItem()
-        while item != None:
+        sleepTime = FILE_DL_NORMAL_SLEEP
+        while item is not None:
             print(str(self.threadName) + '线程当前item：' + str(item))
             url = item.url
             name = item.name
@@ -45,4 +47,10 @@ class MultiThreadFileDownloader(threading.Thread):
                 else:
                     break
             item = self.taskManager.getFileItem()
-            time.sleep(FILE_DL_SLEEP)
+
+            if random.randint(0, 9) == 0:  # 10% 概率进行下载队列拥挤程度评定
+                if self.taskManager.getFileDownloadTaskQueueCount() > QUEUE_CROWDED_SIZE:
+                    sleepTime = FILE_DL_SHORT_SLEEP  # 下载加速
+                else:
+                    sleepTime = FILE_DL_NORMAL_SLEEP  # 下载常速
+            time.sleep(sleepTime)

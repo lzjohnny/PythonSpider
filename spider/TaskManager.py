@@ -67,3 +67,9 @@ class TaskManager():
             return True
         self.s.add(url)
         return False
+
+    def getFileDownloadTaskQueueCount(self):
+        return self.fileDownloadTaskQueue.qsize()
+
+    def getPageDownloadTaskQueueCount(self):
+        return self.pageDownloadTaskQueue.qsize()
