@@ -6,7 +6,7 @@ if __name__ == "__main__":
 
     # 种子链接：导航页面
     # url = "http://www.tan8.com/piano.html"
-    url = "http://www.tan8.com/yuepu-12085-m.html"
+    url = "http://www.tan8.com/yuepu-80-m.html"
     # url = "https://zh.moegirl.org/zh-cn/Template:%E8%88%B0%E9%98%9FCollection:%E5%AF%BC%E8%88%AA"
 
     pageDLThreadNum = 3

@@ -30,9 +30,11 @@ class TaskManager():
             self.fileDownloadTaskQueue.put(item)
             name = item.name
             url = item.url
+
+            log_url = url
             if LOG_HIDE_HOST:
-                url = urlparse(url).path
-            print('addFile:{0} url:{1}'.format(name, url))
+                log_url = urlparse(url).path
+            print('addFile:{0} url:{1}'.format(name, log_url))
 
     # 取不出元素返回None
     # def get(self):
@@ -57,9 +59,11 @@ class TaskManager():
         l.release()
         if not dup:
             self.pageDownloadTaskQueue.put(url)
+
+            log_url = url
             if LOG_HIDE_HOST:
-                url = urlparse(url).path
-            print('addPage: ' + url)
+                log_url = urlparse(url).path
+            print('addPage: ' + log_url)
 
     def getPageUrl(self):
         try:
