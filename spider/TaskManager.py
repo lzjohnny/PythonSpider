@@ -1,5 +1,8 @@
+from urllib.parse import urlparse
+from spider.Config import LOG_HIDE_HOST
 import queue
 import threading
+
 
 # 放入速度 > 取出速度 可以缓冲
 # 放入速度 < 取出速度 执行取出行为线程阻塞
@@ -25,7 +28,11 @@ class TaskManager():
         l.release()
         if not dup:
             self.fileDownloadTaskQueue.put(item)
-            print('addFile:{0} url:{1}'.format(item.name, item.url))
+            name = item.name
+            url = item.url
+            if LOG_HIDE_HOST:
+                url = urlparse(url).path
+            print('addFile:{0} url:{1}'.format(name, url))
 
     # 取不出元素返回None
     # def get(self):
@@ -50,6 +57,8 @@ class TaskManager():
         l.release()
         if not dup:
             self.pageDownloadTaskQueue.put(url)
+            if LOG_HIDE_HOST:
+                url = urlparse(url).path
             print('addPage: ' + url)
 
     def getPageUrl(self):
