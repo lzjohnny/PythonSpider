@@ -1,6 +1,9 @@
+from spider.Config import FILE_DL_SLEEP
 import threading
+import time
 import urllib.request
 import os
+
 
 class MultiThreadFileDownloader(threading.Thread):
     def __init__(self, taskManager, threadName):
@@ -8,7 +11,7 @@ class MultiThreadFileDownloader(threading.Thread):
         threading.Thread.__init__(self)
         self.taskManager = taskManager
         self.threadName = threadName
-        self.dirname = '舰队Collection图鉴'
+        self.dirname = 'downloads'
         self.createdir()
 
     def createdir(self):
@@ -34,8 +37,4 @@ class MultiThreadFileDownloader(threading.Thread):
 
             item = self.taskManager.getFileItem()
 
-        # while (item = self.taskManager.getFileItem()) != None:
-        #     url = item.url
-        #     name = item.name
-        #     filePath = self.dirname + os.sep + name + '.jpg'
-        #     urllib.request.urlretrieve(url, filePath)
+            time.sleep(FILE_DL_SLEEP)

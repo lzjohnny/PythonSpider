@@ -8,7 +8,7 @@ class FileDownloader(object):
     def __init__(self, taskManager):
         super().__init__()
         self.taskManager = taskManager
-        self.dirname = '舰队Collection图鉴'
+        self.dirname = 'result'
         self.createdir()
 
     def createdir(self):

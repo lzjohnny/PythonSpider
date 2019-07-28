@@ -12,8 +12,8 @@ class HtmlPageDownloader(object):
     def download(self):
         req = urllib.request.Request(self.url)
         req.add_header('user-agent',
-                           'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:46.0) Gecko/20100101 Firefox/46.0')
-        req.add_header('Host', 'zh.moegirl.org')
+                           'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36')
+        req.add_header('Host', 'www.tan8.com')
 
         response = urllib.request.urlopen(req)
         if response.getcode() != 200:

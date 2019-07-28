@@ -1,5 +1,8 @@
+from spider.Config import PAGE_DL_SLEEP
+import time
 import urllib.request
 import threading
+
 
 # 多线程下载网页
 class MultiThreadHtmlPageDownloader(threading.Thread):
@@ -19,18 +22,20 @@ class MultiThreadHtmlPageDownloader(threading.Thread):
 
             req = urllib.request.Request(url)
             req.add_header('user-agent',
-                               'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:46.0) Gecko/20100101 Firefox/46.0')
-            req.add_header('Host', 'zh.moegirl.org')
+                           'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:46.0) Gecko/20100101 Firefox/46.0')
+            req.add_header('Host', 'www.tan8.com')
 
             response = urllib.request.urlopen(req)
             if response.getcode() != 200:
                 return None
             html = response.read()
             print('--1--')
-            self.htmlParser.pageUrlParser(html, self.threadName)
+            self.htmlParser.pageUrlParser(url, html, self.threadName)
             print('--2--')
-            self.htmlParser.fileUrlParser(html, self.threadName)
+            self.htmlParser.fileUrlParser(url, html, self.threadName)
             print('--3--')
 
             url = self.taskManager.getPageUrl()
             print('取出新页面：' + url)
+
+            time.sleep(PAGE_DL_SLEEP)

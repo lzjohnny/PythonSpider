@@ -25,7 +25,7 @@ class TaskManager():
         l.release()
         if not dup:
             self.fileDownloadTaskQueue.put(item)
-            print('addFile:' + item.name)
+            print('addFile:{0} url:{1}'.format(item.name, item.url))
 
     # 取不出元素返回None
     # def get(self):
