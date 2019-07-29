@@ -1,5 +1,7 @@
+from spider.LogInit import log
 import queue
 import threading
+
 
 # 放入速度 > 取出速度 可以缓冲
 # 放入速度 < 取出速度 执行取出行为线程阻塞
@@ -25,7 +27,9 @@ class TaskManager():
         l.release()
         if not dup:
             self.fileDownloadTaskQueue.put(item)
-            print('addFile:' + item.name)
+            name = item.name
+            url = item.url
+            log.info('addFile:{0} url:{1}'.format(name, url))
 
     # 取不出元素返回None
     # def get(self):
@@ -37,7 +41,7 @@ class TaskManager():
     # 取不出元素等待10s
     def getFileItem(self):
         try:
-            item = self.fileDownloadTaskQueue.get(timeout=10)
+            item = self.fileDownloadTaskQueue.get(timeout=None)
             return item
         except:
             return None
@@ -50,11 +54,11 @@ class TaskManager():
         l.release()
         if not dup:
             self.pageDownloadTaskQueue.put(url)
-            print('addPage: ' + url)
+            log.info('addPage: ' + url)
 
     def getPageUrl(self):
         try:
-            url = self.pageDownloadTaskQueue.get(timeout=10)
+            url = self.pageDownloadTaskQueue.get(timeout=None)
             return url
         except:
             return None
@@ -64,3 +68,9 @@ class TaskManager():
             return True
         self.s.add(url)
         return False
+
+    def getFileDownloadTaskQueueCount(self):
+        return self.fileDownloadTaskQueue.qsize()
+
+    def getPageDownloadTaskQueueCount(self):
+        return self.pageDownloadTaskQueue.qsize()
