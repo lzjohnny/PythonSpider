@@ -4,7 +4,8 @@ import threading
 import time
 import urllib.request
 import os
-import logging
+from spider.LogInit import log
+
 
 class MultiThreadFileDownloader(threading.Thread):
     def __init__(self, taskManager, threadName):
@@ -21,7 +22,7 @@ class MultiThreadFileDownloader(threading.Thread):
 
     def run(self):
         self.download()
-        logging.info(str(self.threadName) + '线程停止')
+        log.info(str(self.threadName) + '线程停止')
 
     def download(self):
         # Python不支持 while (item = self.taskManager.getFileItem()) != None 语法
@@ -29,11 +30,11 @@ class MultiThreadFileDownloader(threading.Thread):
         item = self.taskManager.getFileItem()
         sleepTime = FILE_DL_NORMAL_SLEEP
         while item is not None:
-            logging.info(str(self.threadName) + '线程当前item：' + str(item))
+            log.info(str(self.threadName) + '线程当前item：' + str(item))
             url = item.url
             name = item.name
 
-            logging.info(str(self.threadName) + '线程当前下载图片：' + name)
+            log.info(str(self.threadName) + '线程当前下载图片：' + name)
             filePath = self.dirname + os.sep + name + '.png'
 
             remaining_download_tries = DOWNLOAD_TRIES
@@ -41,7 +42,7 @@ class MultiThreadFileDownloader(threading.Thread):
                 try:
                     urllib.request.urlretrieve(url, filePath)
                 except:
-                    logging.info('{0}线程下载图片异常 name:{1} url:{2}'.format(str(self.threadName), name, url))
+                    log.info('{0}线程下载图片异常 name:{1} url:{2}'.format(str(self.threadName), name, url))
                     remaining_download_tries = remaining_download_tries - 1
                     continue
                 else:

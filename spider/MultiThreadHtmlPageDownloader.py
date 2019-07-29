@@ -1,4 +1,4 @@
-import logging
+from spider.LogInit import log
 import random
 from spider.Config import *
 import time
@@ -42,7 +42,7 @@ class MultiThreadHtmlPageDownloader(threading.Thread):
         url = self.taskManager.getPageUrl()
         sleepTime = PAGE_DL_NORMAL_SLEEP
         while url is not None:
-            logging.info('线程 ' + str(self.threadName) + ' 开始下载页面')
+            log.info('线程 ' + str(self.threadName) + ' 开始下载页面')
 
             req = urllib.request.Request(url)
             ua = random.choice(self.user_agent_list)
@@ -55,7 +55,7 @@ class MultiThreadHtmlPageDownloader(threading.Thread):
                 try:
                     response = urllib.request.urlopen(req)
                 except:
-                    logging.info('{0}线程下载页面异常 url:{1}'.format(str(self.threadName), url))
+                    log.info('{0}线程下载页面异常 url:{1}'.format(str(self.threadName), url))
                     remaining_download_tries = remaining_download_tries - 1
                     continue
                 else:
@@ -64,14 +64,14 @@ class MultiThreadHtmlPageDownloader(threading.Thread):
             if response.getcode() != 200:
                 return None
             html = response.read()
-            logging.info('--1--')
+            log.info('--1--')
             self.htmlParser.pageUrlParser(url, html, self.threadName)
-            logging.info('--2--')
+            log.info('--2--')
             self.htmlParser.fileUrlParser(url, html, self.threadName)
-            logging.info('--3--')
+            log.info('--3--')
 
             url = self.taskManager.getPageUrl()
-            logging.info('取出新页面：' + url)
+            log.info('取出新页面：' + url)
 
             if random.randint(0, 9) == 0:  # 10% 概率进行下载队列拥挤程度评定
                 if self.taskManager.getFileDownloadTaskQueueCount() > QUEUE_CROWDED_SIZE:

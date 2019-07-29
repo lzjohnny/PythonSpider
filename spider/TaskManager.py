@@ -1,4 +1,4 @@
-import logging
+from spider.LogInit import log
 import queue
 import threading
 
@@ -29,7 +29,7 @@ class TaskManager():
             self.fileDownloadTaskQueue.put(item)
             name = item.name
             url = item.url
-            logging.info('addFile:{0} url:{1}'.format(name, url))
+            log.info('addFile:{0} url:{1}'.format(name, url))
 
     # 取不出元素返回None
     # def get(self):
@@ -54,7 +54,7 @@ class TaskManager():
         l.release()
         if not dup:
             self.pageDownloadTaskQueue.put(url)
-            logging.info('addPage: ' + url)
+            log.info('addPage: ' + url)
 
     def getPageUrl(self):
         try:
