@@ -9,11 +9,13 @@ from spider.LogInit import log
 
 class MultiThreadFileDownloader(threading.Thread):
     def __init__(self, taskManager, threadName):
+        cur_path = os.path.dirname(os.path.realpath(__file__))
+        log_path = os.path.join(os.path.dirname(cur_path), 'downloads')
 
         threading.Thread.__init__(self)
         self.taskManager = taskManager
         self.threadName = threadName
-        self.dirname = 'downloads'
+        self.dirname = log_path
         self.createdir()
 
     def createdir(self):

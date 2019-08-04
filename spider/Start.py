@@ -1,12 +1,13 @@
 import os
 import sys
-from spider.LogInit import log
 
+# 非 IDE 环境下运行，手动添加 import 路径
 curPath = os.path.abspath(os.path.dirname(__file__))
 rootPath = os.path.split(curPath)[0]
 sys.path.append(rootPath)
 
 from spider import CoreSpider
+from spider.LogInit import log
 
 if __name__ == "__main__":
     # 开始爬虫
