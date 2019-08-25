@@ -88,5 +88,8 @@ ENV/
 # Rope project settings
 .ropeproject
 
+# Jetbrains project settings
+.idea
+
 downloads/*
 logs/*
